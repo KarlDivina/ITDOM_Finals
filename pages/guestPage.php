@@ -1,6 +1,114 @@
 <?php 
     session_start();
 
+    $_SESSION['MENU_ITEMS'] = array(
+        "T1" => [
+            "longname" => "Men's Crew Neck Tee", 
+            "price" => "349.75",
+            "image" => "..\assets\_1_Mens_CrewNeckTee.jpg",
+        ],
+        "T2" => [
+            "longname" => "Men's Polo Shirt", 
+            "price" => "399.00",
+            "image" => "..\assets\_2_Mens_PoloShirt.jpg",
+        ],
+        "T3" => [
+            "longname" => "Men's Crew Neck Graphic Tee", 
+            "price" => "399.75",
+            "image" => "..\assets\_3_Mens_Crew_NeckGraphicTee.jpg",
+        ],
+        "T4" => [
+            "longname" => "Men's Active Polo Shirt", 
+            "price" => "599.75",
+            "image" => "../assets/_4_Mens_ActivePoloShirt.jpg",
+        ],
+        "T5" => [
+            "longname" => "Men's Short Sleeve Tee", 
+            "price" => "399.00",
+            "image" => "../assets/_5_Mens_ShortSleeveTee.jpg",
+        ],
+        "P1" => [
+            "longname" => "Men's Colored Pants", 
+            "price" => "799.75",
+            "image" => "../assets/_6_Mens_ColoredPants.jpg",
+        ],
+        "P2" => [
+            "longname" => "Men's Denim Pants", 
+            "price" => "845.75",
+            "image" => "../assets/_7_Mens_DenimPants.jpg",
+        ],
+        "P3" => [
+            "longname" => "Men's Loungewear Pants", 
+            "price" => "729.75",
+            "image" => "../assets/_8_Mens_LoungewearPants.jpg",
+        ],
+        "P4" => [
+            "longname" => "Men's Cargo Pants", 
+            "price" => "1,099.75",
+            "image" => "../assets/_9_Mens_CargoPants.jpg",
+        ],
+        "P5" => [
+            "longname" => "Men's Jogging Pants", 
+            "price" => "699.75",
+            "image" => "../assets/_10_Mens_JoggingPants.jpg",
+        ],
+        "S1" => [
+            "longname" => "Men's Swim Shorts", 
+            "price" => "499.75",
+            "image" => "../assets/_11_Mens_SwimShorts.jpg",
+        ],
+        "S2" => [
+            "longname" => "Women's Beach Shorts", 
+            "price" => "469.75",
+            "image" => "../assets/_12_Womens_BeachShorts.jpg",
+        ],
+        "S3" => [
+            "longname" => "Jun De Leon Women's Beach Shorts", 
+            "price" => "374.81",
+            "image" => "../assets/_13_Womens_BeachShorts.jpg",
+        ],
+        "S4" => [
+            "longname" => "Patrick Uy Women's Beach Shorts", 
+            "price" => "374.81",
+            "image" => "../assets/_14_Womens_BeachShorts.jpg",
+        ],
+        "S5" => [
+            "longname" => "Jun De Leon Men's Swim Shorts", 
+            "price" => "487.31",
+            "image" => "../assets/_15_Mens_SwimShorts.jpg",
+        ],
+        "H1" => [
+            "longname" => "Men's Bucket Hat", 
+            "price" => "399.75",
+            "image" => "../assets/_16_Mens_BucketHat.jpg",
+        ],
+        "H2" => [
+            "longname" => "Better Made X Stray Kids Men's Baseball Cap", 
+            "price" => "399.75",
+            "image" => "../assets/_17_Mens_BaseballCap.jpg",
+        ],
+        "H3" => [
+            "longname" => "Men's Baseball Cap", 
+            "price" => "349.75",
+            "image" => "../assets/_18_Mans_Cap.jpg",
+        ],
+        // "H4" => [
+        //     "longname" => "Bench Everyday Men's Cap", 
+        //     "price" => "349.75",
+        //     "image" => "../assets/McCafeIcedCoffeeVanilla.png",
+        // ],
+        "H5" => [
+            "longname" => "Bench Everyday Men's Bonnet", 
+            "price" => "429.75",
+            "image" => "../assets/_20_Mens_Bonnet.jpg",
+        ],
+    );
+
+    // shortname  -- change to category?
+    // longname
+    // price
+    // image
+
     $_SESSION['FUNCTIONS'] = array(
         "F1" => "add_item",
         "F2" => "remove_item",
@@ -9,6 +117,36 @@
         "F5" => "logout_user",
         "F9" => "order_item",
         "F0" => "clear_order",
+    );
+
+    $_SESSION['CREDENTIALS'] = array(
+        0 => [
+            "index" => 0,
+            "name_full" => "Test Admin",
+            "name_first" => "Test",
+            "name_last" => "Admin",
+            "username" => "testadmin",
+            "password" => "adminpass",
+            "access" => "ADMIN",
+        ],
+        1 => [
+            "index" => 1,
+            "name_full" => "Test Member",
+            "name_first" => "Test",
+            "name_last" => "Member",
+            "username" => "testmember",
+            "password" => "memberpass",
+            "access" => "MEMBER",
+        ],
+        2 => [
+            "index" => 2,
+            "name_full" => "Test Super",
+            "name_first" => "Test",
+            "name_last" => "Super",
+            "username" => "testsuper",
+            "password" => "superpass",
+            "access" => "SUPER",
+        ],
     );
 
     if (!isset($_SESSION['CURRENT_ORDER'])){
@@ -21,153 +159,12 @@
     } else {
         $TOTAL_PRICE = $_SESSION['TOTAL_PRICE'];
     }
-    if (!isset($_SESSION['CREDENTIALS'])){
-        $_SESSION['CREDENTIALS'] = array(
-            0 => [
-                "index" => 0,
-                "name_full" => "Test Admin",
-                "name_first" => "Test",
-                "name_last" => "Admin",
-                "username" => "testadmin",
-                "password" => "adminpass",
-                "access" => "ADMIN",
-            ],
-            1 => [
-                "index" => 1,
-                "name_full" => "Test Member",
-                "name_first" => "Test",
-                "name_last" => "Member",
-                "username" => "testmember",
-                "password" => "memberpass",
-                "access" => "MEMBER",
-            ],
-            2 => [
-                "index" => 2,
-                "name_full" => "Test Super",
-                "name_first" => "Test",
-                "name_last" => "Super",
-                "username" => "testsuper",
-                "password" => "superpass",
-                "access" => "SUPER",
-            ],
-        );
-        
 
-        // index
-        // name_full
-        // name_first
-        // name_last
-        // username
-        // password
-        // access
-    } 
-    if (!isset($_SESSION['MENU_ITEMS'])){
-        $_SESSION['MENU_ITEMS'] = array(
-            "T1" => [
-                "longname" => "Men's Crew Neck Tee", 
-                "price" => "349.75",
-                "image" => "..\assets\_1_Mens_CrewNeckTee.jpg",
-            ],
-            "T2" => [
-                "longname" => "Men's Polo Shirt", 
-                "price" => "399.00",
-                "image" => "..\assets\_2_Mens_PoloShirt.jpg",
-            ],
-            "T3" => [
-                "longname" => "Men's Crew Neck Graphic Tee", 
-                "price" => "399.75",
-                "image" => "..\assets\_3_Mens_Crew_NeckGraphicTee.jpg",
-            ],
-            "T4" => [
-                "longname" => "Men's Active Polo Shirt", 
-                "price" => "599.75",
-                "image" => "../assets/_4_Mens_ActivePoloShirt.jpg",
-            ],
-            "T5" => [
-                "longname" => "Men's Short Sleeve Tee", 
-                "price" => "399.00",
-                "image" => "../assets/_5_Mens_ShortSleeveTee.jpg",
-            ],
-            "P1" => [
-                "longname" => "Men's Colored Pants", 
-                "price" => "799.75",
-                "image" => "../assets/_6_Mens_ColoredPants.jpg",
-            ],
-            "P2" => [
-                "longname" => "Men's Denim Pants", 
-                "price" => "845.75",
-                "image" => "../assets/_7_Mens_DenimPants.jpg",
-            ],
-            "P3" => [
-                "longname" => "Men's Loungewear Pants", 
-                "price" => "729.75",
-                "image" => "../assets/_8_Mens_LoungewearPants.jpg",
-            ],
-            "P4" => [
-                "longname" => "Men's Cargo Pants", 
-                "price" => "1,099.75",
-                "image" => "../assets/_9_Mens_CargoPants.jpg",
-            ],
-            "P5" => [
-                "longname" => "Men's Jogging Pants", 
-                "price" => "699.75",
-                "image" => "../assets/_10_Mens_JoggingPants.jpg",
-            ],
-            "S1" => [
-                "longname" => "Men's Swim Shorts", 
-                "price" => "499.75",
-                "image" => "../assets/_11_Mens_SwimShorts.jpg",
-            ],
-            "S2" => [
-                "longname" => "Women's Beach Shorts", 
-                "price" => "469.75",
-                "image" => "../assets/_12_Womens_BeachShorts.jpg",
-            ],
-            "S3" => [
-                "longname" => "Jun De Leon Women's Beach Shorts", 
-                "price" => "374.81",
-                "image" => "../assets/_13_Womens_BeachShorts.jpg",
-            ],
-            "S4" => [
-                "longname" => "Patrick Uy Women's Beach Shorts", 
-                "price" => "374.81",
-                "image" => "../assets/_14_Womens_BeachShorts.jpg",
-            ],
-            "S5" => [
-                "longname" => "Jun De Leon Men's Swim Shorts", 
-                "price" => "487.31",
-                "image" => "../assets/_15_Mens_SwimShorts.jpg",
-            ],
-            "H1" => [
-                "longname" => "Men's Bucket Hat", 
-                "price" => "399.75",
-                "image" => "../assets/_16_Mens_BucketHat.jpg",
-            ],
-            "H2" => [
-                "longname" => "Better Made X Stray Kids Men's Baseball Cap", 
-                "price" => "399.75",
-                "image" => "../assets/_17_Mens_BaseballCap.jpg",
-            ],
-            "H3" => [
-                "longname" => "Men's Baseball Cap", 
-                "price" => "349.75",
-                "image" => "../assets/_18_Mans_Cap.jpg",
-            ],
-            // "H4" => [
-            //     "longname" => "Bench Everyday Men's Cap", 
-            //     "price" => "349.75",
-            //     "image" => "../assets/McCafeIcedCoffeeVanilla.png",
-            // ],
-            "H5" => [
-                "longname" => "Bench Everyday Men's Bonnet", 
-                "price" => "429.75",
-                "image" => "../assets/_20_Mens_Bonnet.jpg",
-            ],
-        );
-        // longname
-        // price
-        // image
-    } 
+    // index
+    // name_full
+    // name_first
+    // name_last
+    // access
 
 // if access == null
 // Login/Register
@@ -222,14 +219,7 @@
                         <a class="nav-link" href="#">Give us a review!</a>
                     </li> -->
                     <?php
-                        if(isset($_SESSION["ACCESS"])){
-                            checkAccess();
-                        } else {
-                            echo ("
-                                <a class=\""."nav-link disabled\""." aria-current=\""."page\""." href=\""."loginPage.php\"".">Cart</a>
-                                <a class=\""."nav-link\""." aria-current=\""."page\""." href=\""."loginPage.php\"".">Sign in</a>
-                            ");
-                        }
+                        checkAccess()
                     ?>
                 </ul>
                 </div>
@@ -240,6 +230,7 @@
     <section class="items">
         <?php
             $MENU_ITEMS = $_SESSION['MENU_ITEMS'];
+            $CREDENTIALS = $_SESSION['CREDENTIALS'];
 
             function printItems() {
                 $MENU_ITEMS = $_SESSION['MENU_ITEMS'];
@@ -292,7 +283,6 @@
                                     clearOrder();
                                 } else {
                                     logoutUser();
-                                    reloadPage();
                                 }
                             } else {
                                 $providedUsername = $_POST['username'];
@@ -302,7 +292,8 @@
                                         $_SESSION['ACCESS'] = getAccess($userDetails);
                                         $_SESSION['FULLNAME'] = getFullname($userDetails);
                                         loginUser($CREDENTIALS, $providedUsername, $providedPassword);
-                                        reloadPage();
+                                    } else  {
+                                        // login dne
                                     } 
                                 }
                             }
@@ -359,11 +350,55 @@
                 return($itemImage);
             }
 
+            function loginUser($CREDENTIALS, $providedUser, $providedPass){
+                foreach ($CREDENTIALS as $user => $userDetails){
+                    $USERNAME = getUsername($userDetails);
+                    $PASSWORD = getPassword($userDetails);
+
+                    verifyDetails($USERNAME, $PASSWORD, $providedUser, $providedPass, "LOGIN");
+                }
+            }
+
             function logoutUser(){
-                unset($_SESSION["ACCESS"]);
-                unset($_SESSION["FULLNAME"]);
-                
-                reloadPage();
+            
+                $_SESSION["ACCESS"] = "";
+                $_SESSION["FULLNAME"] = "";
+                verifyDetails(null, null, null, null, "LOGOUT");
+            }
+
+            function verifyDetails($USER, $PASS, $user, $pass, $intent){
+                $ACCESS = $_SESSION["ACCESS"];
+                if(strcmp($intent, "LOGIN")){
+                    if(strcmp($USER, $user) == 0){
+                        if (strcmp($PASS, $pass) == 0){
+                            checkAccess($ACCESS);
+                            printItems();
+                        } else {
+                            //go back to login, show invalid password
+                        }
+                    } else {
+                        //go back to login, show invalid username
+                    }
+                } else {
+                    printItems();
+                }
+            }
+
+            function getUsername($user){
+                $username = $user['username'];
+                return($username);
+            }
+            function getPassword($user){
+                $password = $user['password'];
+                return($password);
+            }
+            function getAccess($user){
+                $access = $user['access'];
+                return($access);
+            }
+            function getFullname($user){
+                $fullname = $user['name_full'];
+                return($fullname);
             }
             
             function checkAccess(){
@@ -413,16 +448,26 @@
                                     <input type=\""."submit\""." class=\""."nav-link\""." aria-current=\""."page\""." name=\""."logout_user\""." value=\""."Sign out\""."/>
                                 </li>
                             </form>
+                        ");
+                        echo ("
                             <li class=\""."nav-item\"".">
                                 <a class=\""." nav-link disabled active\""." aria-current=\""."page\""."> Welcome, ". $_SESSION['FULLNAME'] ."</a>
                             </li>
                         ");
+                    } else {
+                        echo ("
+                            <form
+                                method=\""."post\""."
+                                action=\""."orderReciept.php\""."
+                            >
+                                <li class=\""."nav-item\"".">
+                                    <input type=\""."submit\""." class=\""."nav-link\""." name=\""."finish_order\""." value=\""."Cart\""."/>
+                                </li>
+                            </form>
+                            <a class=\""."nav-link\""." aria-current=\""."page\""." href=\""."loginPage.php\"".">Sign in</a>
+                        ");
                     }
                 }
-            }
-
-            function reloadPage(){
-                echo("<meta http-equiv='refresh' content='1'>");
             }
         ?>
     </section>

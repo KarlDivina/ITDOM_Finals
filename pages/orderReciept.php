@@ -8,40 +8,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finish Order</title>
+    <title>Max Multi : Order</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="midterm.css">
 </head>
 <body class="container-fluid">
-    <div>
-        <div class="col-12" >
-            <h1 class="header-text">
-                <a href="Midterm.php">
-                    <img src="../assets/logo.png" class="row logo" width="250" height="150" text-align="center">
-                </a>
-                McDonald's
-            </h1>
-        </div>
-    </div>
     <div class="row">
         <div class="col-12">
             <nav class="navbar navbar-expand-lg bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="Midterm.php"><img src="../assets/logo.png" class="navbar-logo" text-align="center"></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="homePage.php">Navbar</a>
+                <button 
+                    class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation"
+                >
                     <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Cart</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="#">Take a break and have a McDonald's merienda! I'm lovin' it!</a>
-                            </li>
-                        </ul>
-                    </div>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="homePage.php">Home</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Give us a review!</a>
+                    </li> -->
+                    <?php
+                        checkAccess()
+                    ?>
+                </ul>
                 </div>
+            </div>
             </nav>
         </div>
     </div>
@@ -80,6 +81,12 @@
             }
         }
 
+        function clearOrder(){
+            if(isset($_SESSION['CURRENT_ORDER'])){
+                unset($_SESSION['CURRENT_ORDER']);
+            }
+        }
+
         function removeItem(){
             $currentOrder = $_SESSION['CURRENT_ORDER'];
             array_pop($currentOrder);
@@ -111,14 +118,7 @@
                 echo("</h4>");
             }
             echo "<br>";
-        }  
- 
-        function printTotal(){
-            $TOTAL_PRICE = $_SESSION['TOTAL_PRICE'];
-            if ($TOTAL_PRICE != 0){
-                echo ("<p> TOTAL: ₱$TOTAL_PRICE </p>");
-            }
-        } 
+        }    
 
         function calculateTotal(){
             $orderValue = $_SESSION['CURRENT_ORDER'];
@@ -132,6 +132,13 @@
             $_SESSION['TOTAL_PRICE'] = $TOTAL_PRICE;
         }
 
+        function printTotal(){
+            if (isset($_SESSION['TOTAL_PRICE'])){
+                $TOTAL_PRICE = $_SESSION['TOTAL_PRICE'];
+                echo ("<p> TOTAL: ₱$TOTAL_PRICE </p>");
+            }
+        } 
+
         function getName($item, $MENU_ITEMS){
             $itemName = $MENU_ITEMS[$item]['longname'];
             return($itemName);
@@ -143,7 +150,78 @@
         function getImage($item, $MENU_ITEMS){
             $itemImage = $MENU_ITEMS[$item]['image'];
             return($itemImage);
-        }    
+        } 
+            
+        function checkAccess(){
+            if(isset($_SESSION['ACCESS'])){
+                $userAccess = $_SESSION['ACCESS'];
+                if($userAccess == "SUPER"){
+                    //show add item + user
+                } else if($userAccess == "ADMIN"){
+                    echo ("
+                        <form
+                            method=\""."post\""."
+                            action=\""."orderReciept.php\""."
+                        >
+                            <li class=\""."nav-item\"".">
+                                <input type=\""."submit\""." class=\""."nav-link disabled active\""." name=\""."finish_order\""." value=\""."Cart\""."/>
+                            </li>
+                        </form>
+                        <form
+                            method=\""."post\""."
+                            action=\""."homePage.php\""."
+                        >
+                            <li class=\""."nav-item\"".">
+                                <input type=\""."submit\""." class=\""."nav-link\""." aria-current=\""."page\""." name=\""."logout_user\""." value=\""."Sign out\""."/>
+                            </li>
+                        </form>
+                    ");
+                    echo ("
+                        <li class=\""."nav-item\"".">
+                            <a class=\""." nav-link disabled active\""." aria-current=\""."page\""."> Welcome, ". $_SESSION['FULLNAME'] ."</a>
+                        </li>
+                    ");
+                } else if($userAccess == "MEMBER"){
+                    echo ("
+                        <form
+                            method=\""."post\""."
+                            action=\""."orderReciept.php\""."
+                        >
+                            <li class=\""."nav-item\"".">
+                                <input type=\""."submit\""." class=\""."nav-link disabled active\""." name=\""."finish_order\""." value=\""."Cart\""."/>
+                            </li>
+                        </form>
+                        <form
+                            method=\""."post\""."
+                            action=\""."homePage.php\""."
+                        >
+                            <li class=\""."nav-item\"".">
+                                <input type=\""."submit\""." class=\""."nav-link\""." aria-current=\""."page\""." name=\""."logout_user\""." value=\""."Sign out\""."/>
+                            </li>
+                        </form>
+                        <li class=\""."nav-item\"".">
+                            <a class=\""." nav-link disabled active\""." aria-current=\""."page\""."> Welcome, ". $_SESSION['FULLNAME'] ."</a>
+                        </li>
+                    ");
+                }
+            } else {
+                    echo ("
+                        <form
+                            method=\""."post\""."
+                            action=\""."orderReciept.php\""."
+                        >
+                            <li class=\""."nav-item\"".">
+                                <input type=\""."submit\""." class=\""."nav-link disabled active\""." name=\""."finish_order\""." value=\""."Cart\""."/>
+                            </li>
+                        </form>
+                        <a class=\""."nav-link\""." aria-current=\""."page\""." href=\""."loginPage.php\"".">Sign in</a>
+                    ");
+                }
+        }
+
+        function reloadPage(){
+            echo("<meta http-equiv='refresh' content='1'>");
+        } 
     ?>
 </body>
 </html>
