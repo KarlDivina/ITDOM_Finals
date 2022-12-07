@@ -308,6 +308,24 @@
                                                 /> 
                                             </div>
                                         </form>
+                                        
+                                        <form 
+                                            method="."post"."
+                                            id="."menu"."
+                                            action="."./homePage.php"."
+                                        >
+                                            <div class="."col-2".">
+                                                <input 
+                                                    type="."hidden"."
+                                                    name="."remove_item"."
+                                                    value="."$item"."
+                                                />
+                                                <input 
+                                                    type="."submit"."
+                                                    value="."Delete"."
+                                                /> 
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>"
                             );
@@ -394,7 +412,10 @@
                             }
                         } 
                     } else {
-                        removeItem();
+                        $item = $_POST[$_SESSION['FUNCTIONS']["F2"]];
+                        if (array_key_exists($_SESSION['FUNCTIONS']["F2"], $_POST)){
+                            removeItem($item);
+                        }
                     }
                 } else {
                     $newItem = $_POST[$_SESSION['FUNCTIONS']["F1"]];
@@ -409,6 +430,11 @@
             function addItem($addValue){
                 array_push($_SESSION['CURRENT_ORDER'], $addValue);
                 calculateTotal();
+            }
+
+            function removeItem($removeValue){
+                unset($_SESSION["MENU_ITEMS"][$removeValue]);
+                reloadPage();
             }
 
             function calculateTotal(){
