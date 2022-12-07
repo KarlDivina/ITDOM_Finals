@@ -294,7 +294,7 @@
                 if (empty($_POST[$_SESSION['FUNCTIONS']["F1"]])){ //add_item
                     if (empty($_POST[$_SESSION['FUNCTIONS']["F2"]])){ //remove_item
                         if (empty($_POST[$_SESSION['FUNCTIONS']["F3"]])){ //order is complete?
-                            clearOrder();
+                                    clearOrder();
                         } 
                     } else {
                         removeItem();
