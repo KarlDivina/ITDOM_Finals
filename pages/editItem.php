@@ -82,8 +82,13 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             if (array_key_exists($_SESSION['FUNCTIONS']["F6"], $_POST)){
                 $MENU_ITEMS = $_SESSION["MENU_ITEMS"];
-                $item = $_POST[$_SESSION['FUNCTIONS']["F6"]];
-            } 
+                if(isset($_POST[$_SESSION['FUNCTIONS']["F6"]])){
+                    $item = $_POST[$_SESSION['FUNCTIONS']["F6"]];
+                    $_SESSION["OLDITEM"] = $item;
+                } else {
+                    $item = $_SESSION["OLDITEM"];
+                }
+            }
         }
     ?>
     <form
@@ -94,19 +99,18 @@
             <div class="col-12">
                 <div class="row item_order">
                     <div class="col-4 card-item">
-                        <!-- <div class="order_image card-img-top">
+                        <div class="order_image card-img-top">
                             <?php
                                 echo ("<img src=".getImage($item, $MENU_ITEMS).">");
                             ?>
-                        </div> -->
+                        </div>
                         <div class="card-body">
-                            <section class="items">
-                                <p class="card-text">
+                                <p class="card-text mt-2s">
                                     Item Key: 
                                     <input
                                         type="text"
                                         name="username"
-                                        value="<?php echo key($item); ?>"
+                                        value="<?php echo($item); ?>"
                                     />
                                 </p>
                                 <p class="card-text">
@@ -125,17 +129,9 @@
                                         value="<?php echo (getPrice($item, $MENU_ITEMS)); ?>"
                                     />
                                 </p>
-                            </section>
-
-                            <!-- <h4 class="card-title">
-                                <?php echo ("<h4>".getName($item, $MENU_ITEMS)."</h4>")?>'
-                            </h4>
-                            <p>
-                                <?php echo ("<p>₱".getPrice($item, $MENU_ITEMS)."</p>") ?>
-                            </p> -->
                             <input 
                                 type="hidden"
-                                name="add_item"
+                                name="edit_item"
                                 value=<?php echo("$item");?>
                             />
                             <input 
@@ -156,13 +152,27 @@
             if (!empty($_POST[$_SESSION['FUNCTIONS']["F7"]])){
                 $newItem = $_POST[$_SESSION['FUNCTIONS']["F7"]];
                 if (array_key_exists($_SESSION['FUNCTIONS']["F7"], $_POST)){
-                    editItem($newItem, $item);
+                    $oldKey = $_SESSION["OLDITEM"];
+                    $newKey = $_POST["key"];
+                    // $newImage = $_POST["image"];
+                    $newName = $_POST["name"];
+                    $newPrice = $_POST["price"];
+
+
+                    // setImage($oldKey, $MENU_ITEMS, $newValue);
+                    setName($oldKey, $MENU_ITEMS, $newName);
+                    setPrice($oldKey, $MENU_ITEMS, $newPrice);
+                    editItem($newKey, $oldKey);
                 }
             }
         }
 
-        function editItem($newValue, $item){
-            $_SESSION['MENU_ITEMS'][$newValue] = array_pop($_SESSION['MENU_ITEMS'][$item]);
+        function editItem($newValue, $oldValue){
+            $_SESSION['MENU_ITEMS'][$newValue] = array_pop($_SESSION['MENU_ITEMS'][$oldValue]);
+
+            ?> 
+            <meta http-equiv="refresh" content="0;url=http://localhost/ITDOM2/Finals/pages/homePage.php"> 
+            <?php
         }
 
         function getName($item, $MENU_ITEMS){

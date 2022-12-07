@@ -1,6 +1,5 @@
 <?php 
     session_start(); 
-    // session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -134,7 +133,7 @@
                     $USERNAME = 
                     $error = loginUser($providedUsername, $providedPassword);
                     if(!$error){
-                        ?> <meta http-equiv="refresh" content="0;url=http://localhost/ITDOM2/Finals/pages/homePage.php"> <?php
+                        ?> <meta http-equiv="refresh" content="0;url=http://localhost/ITDOM2/ITDOM_Finals/pages/homePage.php"> <?php
                     } else {
                         printError();
                     }
@@ -142,7 +141,7 @@
                     printError();
                 }
             }
-        } else if(!isset($_SESSION["ACCESS"])){
+        } else {
             printLogin();
         } 
 
