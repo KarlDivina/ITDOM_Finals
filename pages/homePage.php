@@ -7,6 +7,9 @@
         "F3" => "finish_order",
         "F4" => "login_user",
         "F5" => "logout_user",
+        "F6" => "edit_item",
+        "F7" => "update_item",
+        "F8" => "create_item",
         "F9" => "order_item",
         "F0" => "clear_order",
     );
@@ -254,39 +257,94 @@
                     $itemName = getName($menuItem);
                     $itemPrice = getPrice($menuItem);
                     $itemImage = getImage($menuItem);
+
+                    if($_SESSION["ACCESS"] == "MEMBER"){
+                        echo ("
+                            <form 
+                                method="."post"."
+                                id="."menu"."
+                                action="."./orderItem.php"."
+                            >
+                            <div class="."item".">
+                                <div class="."row".">
+                                    <img src=".$itemImage.">
+                                </div>
+                                <div class="."row".">
+                                    <div class="."col-5".">
+                                        <h4>".$itemName."</h4>
+                                    </div>
+                                    <div class="."col-2".">
+                                        <h5>₱".$itemPrice.".00</h5>
+                                    </div>
+                                    <div class="."col-2".">
+                                        <input 
+                                            type="."hidden"."
+                                            name="."order_item"."
+                                            value="."$item"."
+                                        />
+                                        <input 
+                                            type="."submit"."
+                                            value="."Order"."
+                                        /> 
+                                    </div>
+                                </div>
+                            </div>
+                        </form>"
+                        );
+                    } else if ($_SESSION["ACCESS"] == "ADMIN"){
+                        echo ("
+                            <div class="."item".">
+                                <div class="."row".">
+                                    <img src=".$itemImage.">
+                                </div>
+                                <div class="."row".">
+                                    <div class="."col-5".">
+                                        <h4>".$itemName."</h4>
+                                    </div>
+                                    <div class="."col-2".">
+                                        <h5>₱".$itemPrice.".00</h5>
+                                    </div>
+                                    
+                                    <form 
+                                        method="."post"."
+                                        id="."menu"."
+                                        action="."./orderItem.php"."
+                                    >
+                                        <div class="."col-2".">
+                                            <input 
+                                                type="."hidden"."
+                                                name="."order_item"."
+                                                value="."$item"."
+                                            />
+                                            <input 
+                                                type="."submit"."
+                                                value="."Order"."
+                                            /> 
+                                        </div>
+                                    </form>
+                                    
+                                    <form 
+                                        method="."post"."
+                                        id="."menu"."
+                                        action="."./editItem.php"."
+                                    >
+                                        <div class="."col-2".">
+                                            <input 
+                                                type="."hidden"."
+                                                name="."edit_item"."
+                                                value="."$item"."
+                                            />
+                                            <input 
+                                                type="."submit"."
+                                                value="."Edit"."
+                                            /> 
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>"
+                        );
+                    }
                     
-                    echo ("
-                        <form 
-                            method="."post"."
-                            id="."menu"."
-                            action="."./orderItem.php"."
-                        >
-                        <div class="."item".">
-                            <div class="."row".">
-                                <img src=".$itemImage.">
-                            </div>
-                            <div class="."row".">
-                                <div class="."col-5".">
-                                    <h4>".$itemName."</h4>
-                                </div>
-                                <div class="."col-2".">
-                                    <h5>₱".$itemPrice.".00</h5>
-                                </div>
-                                <div class="."col-2".">
-                                    <input 
-                                        type="."hidden"."
-                                        name="."order_item"."
-                                        value="."$item"."
-                                    />
-                                    <input 
-                                        type="."submit"."
-                                        value="."Order"."
-                                    /> 
-                                </div>
-                            </div>
-                        </div>
-                    </form>"
-                    );
                 }
             }
 

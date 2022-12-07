@@ -256,22 +256,23 @@
                     $itemImage = getImage($menuItem);
                     
                     echo ("
-                        <form 
-                            method="."post"."
-                            id="."menu"."
-                            action="."./orderItem.php"."
-                        >
-                        <div class="."item".">
-                            <div class="."row".">
-                                <img src=".$itemImage.">
+                    <div class="."item".">
+                        <div class="."row".">
+                            <img src=".$itemImage.">
+                        </div>
+                        <div class="."row".">
+                            <div class="."col-5".">
+                                <h4>".$itemName."</h4>
                             </div>
-                            <div class="."row".">
-                                <div class="."col-5".">
-                                    <h4>".$itemName."</h4>
-                                </div>
-                                <div class="."col-2".">
-                                    <h5>₱".$itemPrice.".00</h5>
-                                </div>
+                            <div class="."col-2".">
+                                <h5>₱".$itemPrice.".00</h5>
+                            </div>
+                            
+                            <form 
+                                method="."post"."
+                                id="."menu"."
+                                action="."./orderItem.php"."
+                            >
                                 <div class="."col-2".">
                                     <input 
                                         type="."hidden"."
@@ -283,9 +284,27 @@
                                         value="."Order"."
                                     /> 
                                 </div>
-                            </div>
+                            </form>
+                            
+                            <form 
+                                method="."post"."
+                                id="."menu"."
+                                action="."./editItem.php"."
+                            >
+                                <div class="."col-2".">
+                                    <input 
+                                        type="."hidden"."
+                                        name="."edit_item"."
+                                        value="."$item"."
+                                    />
+                                    <input 
+                                        type="."submit"."
+                                        value="."Edit"."
+                                    /> 
+                                </div>
+                            </form>
                         </div>
-                    </form>"
+                    </div>"
                     );
                 }
             }
