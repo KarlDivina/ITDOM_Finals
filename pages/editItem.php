@@ -19,7 +19,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Max Multi : Edit</title>
+    <title>Max Multi : Edit Item</title>
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="midterm.css">
 </head>
@@ -81,16 +82,12 @@
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
             if (empty($_POST[$_SESSION['FUNCTIONS']["F6"]])){
-                echo("Empty old item - from home");
                 if (empty($_POST[$_SESSION['FUNCTIONS']["F7"]])){
-                    echo("Empty old item - from update");
                 } else {
-                    echo("Reading old item - from update");
                     $MENU_ITEMS = $_SESSION["MENU_ITEMS"];
                     $item = $_SESSION["OLDITEM"];
                 }     
             } else {
-                echo("Reading old item - from home");
                 $MENU_ITEMS = $_SESSION["MENU_ITEMS"];
                 if(isset($_POST[$_SESSION['FUNCTIONS']["F6"]])){
                     $item = $_POST[$_SESSION['FUNCTIONS']["F6"]];
@@ -132,7 +129,7 @@
                                 <p class="card-text">
                                     Item Price: 
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="price"
                                         value="<?php echo (getPrice($item, $MENU_ITEMS)); ?>"
                                     />
@@ -157,24 +154,14 @@
 
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            echo("Before Item Function");
             if (!empty($_POST[$_SESSION['FUNCTIONS']["F7"]])){
-                echo("Update Item Function");
                 if (array_key_exists($_SESSION['FUNCTIONS']["F7"], $_POST)){
-                    echo("Updating!!!");
                     $MENU_ITEMS = $_SESSION["MENU_ITEMS"];
                     $oldKey = $_SESSION["OLDITEM"];
                     $newKey = $_POST["key"];
-                    // $newImage = $_POST["image"];
                     $newName = $_POST["name"];
                     $newPrice = $_POST["price"];
 
-                    echo("Old key is: " . $oldKey);
-                    echo("New key is: " . $newKey);
-                    echo("New name is: " . $newName);
-                    echo("New price is: " . $newPrice);
-
-                    // setImage($oldKey, $MENU_ITEMS, $newImage);
                     setName($oldKey, $MENU_ITEMS, $newName);
                     setPrice($oldKey, $MENU_ITEMS, $newPrice);
                     editItem($newKey, $oldKey);
