@@ -478,6 +478,9 @@
                                     <input type=\""."submit\""." class=\""."nav-link btn btn-outline-light\""." aria-current=\""."page\""." name=\""."logout_user\""." value=\""."Sign out\""." style=\""."color: white; margin-right: 5px;\""."/>
                                 </li>
                             </form>
+                            <li class=\""."nav-item\"".">
+                                <a class=\""."nav-link btn btn-outline-light\""." aria-current=\""."page\""." href=\""."createItem.php\""." style=\""."color: white; margin-right: 5px;\"".">New Item</a>
+                            </li>
                         ");
                         echo ("
                             <li class=\""."nav-item\"".">
