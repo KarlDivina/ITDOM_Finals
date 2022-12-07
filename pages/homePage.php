@@ -434,14 +434,17 @@
 
             function getName($item){
                 $itemName = $item['longname'];
+                // echo($itemName);
                 return($itemName);
             }
             function getPrice($item){
                 $itemPrice = $item['price'];
+                // echo($itemPrice);
                 return($itemPrice);
             }
             function getImage($item){
                 $itemImage = $item['image'];
+                // echo($itemImage);
                 return($itemImage);
             }
 
